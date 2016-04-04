@@ -67,11 +67,11 @@ permissions:
    mrtp.*:
      description: Allows access to all features
       children:
-            mrtp.util.toggle: true
-            mrtp.util.list: true
-            mrtp.util.reload: true
-            mrtp.util.cheat: true
-            mrtp.util.free: true
-            mrtp.util.nocooldown: true
-            mrtp.teleport.sign: true
-            mrtp.teleport.command: true
+        mrtp.util.toggle: true
+        mrtp.util.list: true
+        mrtp.util.reload: true
+        mrtp.util.cheat: true
+        mrtp.util.free: true
+        mrtp.util.nocooldown: true
+        mrtp.teleport.sign: true
+        mrtp.teleport.command: true
