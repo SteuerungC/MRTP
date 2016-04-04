@@ -1,5 +1,5 @@
 name: MRTP
-version: 0.1
+version: ${project.version}
 main: de.steuerungc.mrtp.Main
 softdepend: [Vault, WorldBorder]
 commands:
