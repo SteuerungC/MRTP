@@ -1,0 +1,8 @@
+name: MRTP
+version: 0.1
+main: de.steuerungc.mrtp.Main
+softdepend: [Vault, WorldBorder]
+commands:
+  randomtp:
+    usage: Use /randomtp to teleport to a random location
+    aliases: [rtp, mrtp]

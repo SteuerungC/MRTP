@@ -1,0 +1,106 @@
+## MRTP - Advanced Random-Teleport-Plugin
+## --------------------------------------
+## This Plugin brings a lot of features. Before use you have to configure this plugin in this config. Please work attentively through this file.
+## Please note that this plugin - like every Random-TP plugin too - will cause lags on your server if you enable the teleport on a not fully generated map.
+## The serverload that is caused by chunk generations is often high enough to interrupt a lagless feeling for your players and the servers hardware is just a minor problem.
+## To prevent these lags it is necessarily to set up a worldborder and fill all chunks in these border. For smaller maps you can work with the default worldborder of minecraft,
+## bigger maps may need special worldborder plugins to set up the border and generate all chunks.
+## Red and configured everything? Set this value to true:
+configured: false
+
+##
+## Main settings
+##
+# List all worlds by name in that players can use the "/randomtp"-command. This values are case sensitive!
+enabled_worlds:
+  - world
+  - world_nether
+
+# Here you have to insert some lines for each world. Here is an example for a world with round borders:
+# Please not that the randomtp will only work will in normal worlds (not in nether or ends)
+# myworld:
+#   mode: round
+#   radius: 1000 <-- The radius of the round border from the center
+#
+# This example for rectangular worlds:
+# myworld2:
+#   mode: rect
+#   dist-x: 1000 <-- Distance between the center and the border on x-axis
+#   dist-z: 2000 <-- Distance between the center and the border on z-axis
+#
+# Here is an example for an automatically setup with the build-in world-border
+# myworld3:
+#   mode: auto
+#
+# And you can also use the Borders of the Plugin WorldBorder by Brettflan.
+# You need to install the Plugin an set up a border for the selected world. otherwise the plugin will not start.
+# myworld4:
+#   mode: plugin
+#
+# The normal center of the modes rect and round is the world's spawnpoint. To overwrite this setting you can use:
+#   spawn-x: 10
+#   spawn-z: 10
+# (Make sure that you set both values as integer unter the world (like the mode))
+#
+# Additionally you can add the following settings under each world. You just need to fill in Integer-values
+#   falldown: 200 <-- You will fall down from these y-value on the random location.
+#   save-spawn: 10 <-- Time in seconds in that you will get a resistance effect (Strongly recommended with falldown)
+#   minimal-dist: 30 <-- Minimal distance from the center you will teleportet to
+world:
+  mode: rect
+  dist-x: 1000
+  dist-z: 2000
+  falldown: 200
+  save-spawn: 10
+world_nether:
+  mode: auto
+  minimal-dist: 100
+
+##
+## Message section
+##
+# Use formating codes like &6 or &l.
+messages:
+   prefix: '&9[MRTP]&r'
+   success: 'You were teleported to a random location.'
+   not_enabled: '&cSorry. The teleport is disabled here right now.'
+   poor_player: '&cSorry ... the teleport cost too much.'
+   took_money: '%cost% Dollars where taken for this teleport.'
+   cooldown: '&cSorry. You have to wait %time% seconds to the next teleport.'
+   permission: '&cSorry. You are not allowed to do this.'
+   anticheat: 'Sorry. You can not use Randomtp when you fall down or if you are in lava.'
+   sign: 'Created sign sucessfully.'
+
+##
+## Miscellaneous settings
+##
+# Cooldown will prevent players from spamming the command. This is strongly recommended and indispensable if you have no pre-generated chunks!
+# Time is in seconds.
+cooldown:
+    enabled: true
+    time: 10
+
+# Set to true if players should not use the teleport if there are under water, in lava or falling down.
+anticheat: false
+
+# Price for a teleport, if you wish to activate be shure that you have an economy system and Vault
+vault:
+  enabled: false
+  price: 0.0
+
+# Settings where the players should not be send to.
+# Biomes: List biomes where the player should not be send to by the plugin.
+# Biomes: List blocks on its top the player should not be send to by the plugin. LAVA and VOID is automatically disabled by the plugin.
+disabled:
+  biomes:
+  - OCEAN
+  - RIVER
+  - DEEP_OCEAN
+  blocks:
+  - CACTUS
+
+# --------------- END OF COMMON CONFIG! You have done it! ---------------
+# DO NOT TOUCH! Configs version for future updates
+version: 1
+# DO NOT TOUCH! Setting for internal purpose and debugging.
+interrupt: 1000
