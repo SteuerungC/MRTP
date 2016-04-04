@@ -39,6 +39,9 @@ permissions:
    mrtp.util.list:
      description: List the status of all worlds
      default: op
+   mrtp.util.create:
+     description: Permission to create RandomTP-Signs
+     default: op
    mrtp.util.reload:
      description: Reload the config and the plugin
      default: op
@@ -55,6 +58,7 @@ permissions:
        mrtp.util.toggle: true
        mrtp.util.list: true
        mrtp.util.reload: true
+       mrtp.util.create: true
    mrtp.util.*:
      description: Allows access to all permissions without teleport
      children:
@@ -64,6 +68,7 @@ permissions:
        mrtp.util.cheat: true
        mrtp.util.free: true
        mrtp.util.nocooldown: true
+       mrtp.util.create: true
    mrtp.*:
      description: Allows access to all features
       children:
@@ -75,3 +80,4 @@ permissions:
         mrtp.util.nocooldown: true
         mrtp.teleport.sign: true
         mrtp.teleport.command: true
+        mrtp.util.create: true
