@@ -6,3 +6,72 @@ commands:
   randomtp:
     usage: Use /randomtp to teleport to a random location
     aliases: [rtp, mrtp]
+
+permissions:
+  mrtp.teleport.command:
+    description: Allows to teleport to a random location via command.
+    default: true
+  mrtp.teleport.sign:
+    description: Allows to teleport to a random location via sign
+    default: true
+  mrtp.teleport.*:
+    description: Grants access to teleport via command and sign
+    children:
+      mrtp.teleport.command: true
+      mrtp.teleport.sign: true
+  mrtp.player:
+    description: Grants access to teleport via command and sign
+    children:
+      mrtp.teleport.sign: true
+      mrtp.teleport.command: true
+   mrtp.util.free:
+     description: Players will not be charged for teleport
+     default: op
+   mrtp.util.nocooldown:
+     description: Ignore the build in cooldown
+     default: op
+   mrtp.util.cheat:
+     description: Ignore the build in anticheat-unit
+     default: op
+   mrtp.util.toggle:
+     description: Switch the randomtp in a world
+     default: op
+   mrtp.util.list:
+     description: List the status of all worlds
+     default: op
+   mrtp.util.reload:
+     description: Reload the config and the plugin
+     default: op
+   mrtp.premium:
+     description: Allows acces to teleport via sign without charge and cooldown
+     children:
+       mrtp.teleport.sign: true
+       mrtp.teleport.command: true
+       mrtp.util.free: true
+       mrtp.until.nocooldown: true
+   mrtp.admin:
+     description: Allows the access to all administrative permissions
+     children:
+       mrtp.util.toggle: true
+       mrtp.util.list: true
+       mrtp.util.reload: true
+   mrtp.util.*:
+     description: Allows access to all permissions without teleport
+     children:
+       mrtp.util.toggle: true
+       mrtp.util.list: true
+       mrtp.util.reload: true
+       mrtp.util.cheat: true
+       mrtp.util.free: true
+       mrtp.util.nocooldown: true
+   mrtp.*:
+     description: Allows access to all features
+      children:
+            mrtp.util.toggle: true
+            mrtp.util.list: true
+            mrtp.util.reload: true
+            mrtp.util.cheat: true
+            mrtp.util.free: true
+            mrtp.util.nocooldown: true
+            mrtp.teleport.sign: true
+            mrtp.teleport.command: true

@@ -134,7 +134,7 @@ public class Run implements Runnable {
             return;
         }
 
-        if (cost != 0.0D && !p.hasPermission("mrtp.teleport.free")) {
+        if (cost != 0.0D && !p.hasPermission("mrtp.util.free")) {
             Economy eco = null;
             RegisteredServiceProvider<Economy> rsp = Bukkit.getServer().getServicesManager().getRegistration(Economy.class);
             if (rsp != null) {

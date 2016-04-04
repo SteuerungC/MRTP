@@ -111,7 +111,7 @@ public class CommandHandler implements TabExecutor {
     }
 
     public void reload(CommandSender s) {
-        if (s.hasPermission("mrtp.reload")) {
+        if (s.hasPermission("mrtp.util.reload")) {
             String savedpre = m.sendConfig().getMessage("messages.prefix");
             s.sendMessage(savedpre + " §rStarting to reload the plugin...");
             m.performReload(s, savedpre);
