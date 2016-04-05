@@ -3,12 +3,13 @@ package de.steuerungc.mrtp;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.PluginLogger;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.mcstats.Metrics;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
  * Created by Martin on 01.04.2016.
- * //TODO World-Border Plugin integration
  */
 public class Main extends JavaPlugin {
 
@@ -20,6 +21,11 @@ public class Main extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        try {
+            Metrics metrics = new Metrics(this);
+            metrics.start();
+        } catch (IOException e) {}
+
         try {
             c = new Config(this);
         } catch (Exception ex) {

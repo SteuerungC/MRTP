@@ -96,11 +96,13 @@ public class ConfigValidator {
                 case "rect":
                     String x = c.get(s).getString("dist-x");
                     String z = c.get(s).getString("dist-z");
+                    int x1 = 0;
+                    int z1 = 0;
                     if (x == null || x.equals("")) {
                         ret.add("- Value missing for world " + s + " in mode 'rect': dist-x is not set or missing");
                     } else {
                         try {
-                            Integer.parseInt(x);
+                            x1 = Integer.parseInt(x);
                         } catch (Exception ex) {
                             ret.add("- Can't load " + s + ".dist-x: " + x + " is not an Integer value");
                         }
@@ -109,22 +111,39 @@ public class ConfigValidator {
                         ret.add("- Value missing for world " + s + " in mode 'rect': dist-z is not set or missing");
                     } else {
                         try {
-                            Integer.parseInt(x);
+                            z1 = Integer.parseInt(z);
                         } catch (Exception ex) {
                             ret.add("- Can't load " + s + ".dist-x: " + x + " is not an Integer value");
                         }
                     }
+                    if (x1 > 0 && z1 > 0) {
+                        try {
+                            int mindis =  Integer.parseInt(c.get(s).getString("minimal-dist"));
+                            if (mindis > x1 || mindis > z1) {
+                                ret.add("- Can't load mode for world" + s + ": minimal-dist is bigger that the maximal size!");
+                            }
+                        } catch (Exception ex) {}
+                    }
                     break;
                 case "round":
                     String r = c.get(s).getString("radius");
+                    int r1 = 0;
                     if (r == null || r.equals("")) {
                         ret.add("- Value missing for world " + s + " in mode 'round': radius is not set or missing");
                     } else {
                         try {
-                            Integer.parseInt(r);
+                            r1 = Integer.parseInt(r);
                         } catch (Exception ex) {
                             ret.add("- Can't load " + s + ".radius: " + r + " is not an Integer value");
                         }
+                    }
+                    if (r1 > 0) {
+                        try {
+                            int mindis =  Integer.parseInt(c.get(s).getString("minimal-dist"));
+                            if (mindis > r1) {
+                                ret.add("- Can't load mode for world" + s + ": minimal-dist is bigger that the maximal size!");
+                            }
+                        } catch (Exception ex) {}
                     }
                     break;
                 case "auto":
@@ -133,7 +152,15 @@ public class ConfigValidator {
                             m.warn("NOTICE: The Worldborder for world " + s + " in mode auto is very big.");
                             m.warn("NOTICE: The Border size is " + (int) (m.getServer().getWorld(s).getWorldBorder().getSize()) + "! This may cause lags.");
                         }
+                        try {
+                            int mindis = Integer.parseInt(c.get(s).getString("minimal-dist"));
+                            double r2 = m.getServer().getWorld(s).getWorldBorder().getSize();
+                            if (mindis > r2) {
+                                ret.add("- Can't load mode for world" + s + ": minimal-dist is bigger that the maximal size!");
+                            }
+                        } catch (Exception ex) {}
                     } catch (Exception ex) {}
+
                     break;
                 case "plugin":
                     if(m.getServer().getPluginManager().getPlugin("WorldBorder") == null) {
@@ -142,6 +169,13 @@ public class ConfigValidator {
                         BorderData bd = com.wimbli.WorldBorder.Config.Border(s);
                         if (bd == null) {
                             ret.add("- The WorldBorder in Plugin WorldBorder in World " + s + " is not set.");
+                        } else {
+                            try {
+                                int mindis = Integer.parseInt(c.get(s).getString("minimal-dist"));
+                                if (mindis > bd.getRadiusX() || mindis > bd.getRadiusZ()) {
+                                    ret.add("- Can't load mode for world" + s + ": minimal-dist is bigger that the maximal size!");
+                                }
+                            } catch (Exception ex) {}
                         }
                     }
                     break;

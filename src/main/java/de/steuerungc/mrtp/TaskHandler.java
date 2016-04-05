@@ -33,7 +33,7 @@ public class TaskHandler {
         UUID player = p.getUniqueId();
         Long cooldown = Cooldown.test(player);
 
-        if(cooldown < 1000) {
+        if(cooldown >= 1000) {
             p.sendMessage(m.sendConfig().getMessage("messages.prefix") + "§r " + m.sendConfig().getMessage("messages.cooldown").replace("%time%", "" + cooldown / 1000));
             return;
         }
