@@ -17,7 +17,7 @@ public class TaskHandler {
         this.m = m;
         this.wc = wc;
         if (m.sendConfig().getBoolean("cooldown.enabled")) {
-            new Cooldown(m.sendConfig().getInteger("cooldown.time"));
+            new Cooldown(m.sendConfig().getInteger("cooldown.time") + 1);
         } else {
             new Cooldown(0);
         }
@@ -33,8 +33,8 @@ public class TaskHandler {
         UUID player = p.getUniqueId();
         Long cooldown = Cooldown.test(player);
 
-        if(cooldown != 0L) {
-            p.sendMessage(m.sendConfig().getMessage("messages.prefix") + "§r " + m.sendConfig().getMessage("messages.cooldown").replace("%time%", cooldown.toString()));
+        if(cooldown < 1000) {
+            p.sendMessage(m.sendConfig().getMessage("messages.prefix") + "§r " + m.sendConfig().getMessage("messages.cooldown").replace("%time%", "" + cooldown / 1000));
             return;
         }
 
