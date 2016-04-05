@@ -21,6 +21,8 @@ public abstract class Mode {
         this.world = world;
         this.top = top;
         this.minimal = minimal;
+        blocks.add("STATIONARY_LAVA");
+        blocks.add("LAVA");
     }
 
     public abstract Location generateLocation ();
