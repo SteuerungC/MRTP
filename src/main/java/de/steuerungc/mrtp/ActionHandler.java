@@ -67,13 +67,16 @@ public class ActionHandler implements Listener {
             pie.getPlayer().sendMessage(m.sendConfig().getMessage("messages.prefix") + "§r " + m.sendConfig().getMessage("messages.permission"));
             return;
         }
-
-        if (m.wc.isInConfig(sign.getLine(1))) {
-            th.performTP(pie.getPlayer(), sign.getLine(1));
-            return;
+        if (th != null) {
+            if (m.wc.isInConfig(sign.getLine(1))) {
+                th.performTP(pie.getPlayer(), sign.getLine(1));
+                return;
+            } else {
+                th.performTP(pie.getPlayer(), sign.getWorld().getName());
+                return;
+            }
         } else {
-            th.performTP(pie.getPlayer(), sign.getWorld().getName());
-            return;
+            pie.getPlayer().sendMessage("§4There is an internal error in the plugins configuration. Please refer to log for further information");
         }
     }
 }

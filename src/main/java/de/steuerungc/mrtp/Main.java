@@ -43,13 +43,14 @@ public class Main extends JavaPlugin {
             status = false;
         }
 
-        wc = new WorldChecker(c.getStringList("enabled_worlds"), c.getMessage("messages.prefix"));
-        th = new TaskHandler(this, wc);
-        getCommand("randomtp").setExecutor(new CommandHandler(this, th));
-        getServer().getPluginManager().registerEvents(new ActionHandler(this, th), this);
-
         if(status) {
-
+            wc = new WorldChecker(c.getStringList("enabled_worlds"), c.getMessage("messages.prefix"));
+            th = new TaskHandler(this, wc);
+            getCommand("randomtp").setExecutor(new CommandHandler(this, th));
+            getServer().getPluginManager().registerEvents(new ActionHandler(this, th), this);
+        } else {
+            getCommand("randomtp").setExecutor(new CommandHandler(this, null));
+            getServer().getPluginManager().registerEvents(new ActionHandler(this, null), this);
         }
     }
 
@@ -90,16 +91,16 @@ public class Main extends JavaPlugin {
             status = false;
         }
 
-        wc = new WorldChecker(c.getStringList("enabled_worlds"), c.getMessage("messages.prefix"));
-        th = new TaskHandler(this, wc);
-        getCommand("randomtp").setExecutor(new CommandHandler(this, th));
-        getServer().getPluginManager().registerEvents(new ActionHandler(this, th), this);
-
         if (status) {
-
             cs.sendMessage(savedpre + " §2Reloaded sucessfully!");
+            wc = new WorldChecker(c.getStringList("enabled_worlds"), c.getMessage("messages.prefix"));
+            th = new TaskHandler(this, wc);
+            getCommand("randomtp").setExecutor(new CommandHandler(this, th));
+            getServer().getPluginManager().registerEvents(new ActionHandler(this, th), this);
         } else {
             cs.sendMessage(savedpre + " §4There is an error in your config. Please check the log!");
+            getCommand("randomtp").setExecutor(new CommandHandler(this, null));
+            getServer().getPluginManager().registerEvents(new ActionHandler(this, null), this);
         }
     }
 }
