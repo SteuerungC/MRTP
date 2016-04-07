@@ -1,5 +1,8 @@
 name: MRTP
 version: ${project.version}
+description: Allows to perform teleports to a radom location
+author: SteuerungC
+website: www.steuerungc.de
 main: de.steuerungc.mrtp.Main
 softdepend: [Vault, WorldBorder]
 commands:
