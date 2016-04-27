@@ -6,6 +6,7 @@ import net.milkbowl.vault.economy.EconomyResponse;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.PluginLogger;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -19,7 +20,7 @@ import java.util.UUID;
  */
 public class Run implements Runnable {
 
-    private static HashMap<UUID, Integer> tasks = new HashMap();
+    private static HashMap<UUID, Integer> tasks = new HashMap<>();
     private UUID player;
     private String world, prefix, sucess, poor_player, took_money;
     private Mode mode;
@@ -42,8 +43,12 @@ public class Run implements Runnable {
         this.world = world;
         stop = m.sendConfig().getInteger("interrupt");
 
-        if (m.sendConfig().getBoolean("vault.enabled")) {
-            cost = m.sendConfig().getDouble("vault.price");
+        if (m.sendConfig().getBoolean("vault")) {
+            try {
+                cost = m.sendConfig().getDouble(world + ".price");
+            } catch (NumberFormatException nfe) {
+                new PluginLogger(m).warning("[MRTP - equips Thread] Can't load active Module: Vault for world: Price is not a double value!");
+            } catch (NullPointerException npe) {}
         }
 
         int minimal;
@@ -113,7 +118,7 @@ public class Run implements Runnable {
                 mode = new WBMode(biomes, blocks, world, downfall, minimal);
                 break;
             default:
-                Bukkit.getServer().getPlayer(player).sendMessage("§Sorry. Unable to complete generation of the teleport task.");
+                Bukkit.getServer().getPlayer(player).sendMessage("§4Sorry. Unable to complete generation of the teleport task.");
                 break;
         }
 

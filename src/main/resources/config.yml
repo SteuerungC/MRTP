@@ -42,6 +42,13 @@ enabled_worlds:
 #   spawn-z: 10
 # (Make sure that you set both values as integer unter the world (like the mode))
 #
+# If your server deploys vault with a working economy system you can set a price for a teleport in a specific world.
+# You need to set the value vault to true later in the config.
+# Just add the following line to a world node:
+#   price: 10.0
+# (Notice: If you use a sign to teleport a player from world A to a random location in world B the player will
+# charged with the price set in world B)
+#
 # Additionally you can add the following settings under each world. You just need to fill in Integer-values
 #   falldown: 200 <-- You will fall down from these y-value on the random location.
 #   save-spawn: 10 <-- Time in seconds in that you will get a resistance effect (Strongly recommended with falldown)
@@ -52,9 +59,10 @@ world:
   dist-z: 2000
   falldown: 200
   save-spawn: 10
-world_nether:
+freebuild:
   mode: auto
   minimal-dist: 100
+  price: 10.0
 
 ##
 ## Message section
@@ -80,17 +88,15 @@ cooldown:
     enabled: true
     time: 10
 
+# Set to true if players should be charged for teleport. Set the price in the per-world-settings.
+vault: true
+
 # Set to true if players should not use the teleport if there are under water, in lava or falling down.
 anticheat: false
 
-# Price for a teleport, if you wish to activate be shure that you have an economy system and Vault
-vault:
-  enabled: false
-  price: 0.0
-
 # Settings where the players should not be send to.
 # Biomes: List biomes where the player should not be send to by the plugin.
-# Biomes: List blocks on its top the player should not be send to by the plugin. LAVA and VOID is automatically disabled by the plugin.
+# Biomes: List blocks on its top the player should not be send to by the plugin. LAVA is automatically disabled by the plugin.
 disabled:
   biomes:
   - OCEAN

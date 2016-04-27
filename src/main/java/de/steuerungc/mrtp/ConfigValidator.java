@@ -11,9 +11,9 @@ import java.util.List;
  */
 public class ConfigValidator {
 
-    Config c = null;
-    Main m ;
-    ArrayList<String> ret;
+    private Config c = null;
+    private Main m ;
+    private ArrayList<String> ret;
 
     public ArrayList<String> validateConfig(Config c, Main m) {
         ret = new ArrayList<>();
@@ -277,37 +277,23 @@ public class ConfigValidator {
         String s;
         Boolean on = false;
         try {
-            s = c.get("vault").getString("enabled");
+            s = c.getConfig().getString("vault");
             if (s == null || s.equals("")) {
-                ret.add("- Can't load vault.enabled: The value is not set!");
+                ret.add("- Can't load vault: The value is not set!");
             } else {
                 try {
                     on = Boolean.parseBoolean(s);
                 } catch (Exception ex) {
-                    ret.add("- Can't load vault.enabled: " + s + " is not a Boolean value!");
+                    ret.add("- Can't load vault: " + s + " is not a Boolean value!");
                 }
             }
         } catch (Exception ex) {
-            ret.add("- vault.enabled does not exists!");
+            ret.add("- Node vault does not exists!");
         }
 
         if(on) {
             if (m.getServer().getPluginManager().getPlugin("Vault") == null) {
                 ret.add("- Vault is enabled in your config but not installed!");
-            }
-            try {
-                s = c.get("vault").getString("price");
-                if (s == null || s.equals("")) {
-                    ret.add("- Can't load vault.price: The value is not set!");
-                } else {
-                    try {
-                        Double.parseDouble(s);
-                    } catch (Exception ex) {
-                        ret.add("- Can't load vault.price: " + s + " is not a Double value!");
-                    }
-                }
-            } catch (Exception ex) {
-                ret.add("- vault.price does not exists!");
             }
         }
     }

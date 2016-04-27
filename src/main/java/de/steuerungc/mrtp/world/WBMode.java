@@ -73,8 +73,8 @@ public class WBMode extends Mode {
             }
             return null;
         } else {
-            System.out.println("[MRTP] The Border in world " + world + " was removed. Defaulting to 0,0,0!");
-            return new Location(w, 0.0D, w.getHighestBlockYAt(0,0), 0.0D);
+            System.out.println("[MRTP - search location] The Border in world " + world + " was removed. Not permitting teleport");
+            return null;
         }
     }
 }
