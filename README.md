@@ -1,7 +1,7 @@
-# MRTP v0.1
+# MRTP v1.0-BTA
 Advanced Random Teleport Plugin for Spigot 1.8 and 1.9
 
-**Note that this plugin is in _early Beta_.**
+**Note that this plugin is in _Beta_. You can use this plugin but there are may problems and bugs!**
 
 ### Installation
 This is a plugin for Minecraft Spigot Server with Version 1.8 and above.
