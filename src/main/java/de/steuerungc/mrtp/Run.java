@@ -25,6 +25,7 @@ public class Run implements Runnable {
     private String world, prefix, sucess, poor_player, took_money;
     private Mode mode;
     private int stop, savespawn;
+    private static Economy econ = null;
     private double cost = 0.0D;
 
     public Run (Main m, UUID player, String world) {
@@ -49,6 +50,13 @@ public class Run implements Runnable {
             } catch (NumberFormatException nfe) {
                 new PluginLogger(m).warning("[MRTP - equips Thread] Can't load active Module: Vault for world: Price is not a double value!");
             } catch (NullPointerException npe) {}
+
+            if (cost != 0.0D) {
+                RegisteredServiceProvider<Economy> rsp = m.getServer().getServicesManager().getRegistration(Economy.class);
+                if (rsp != null) {
+                    econ = rsp.getProvider();
+                }
+            }
         }
 
         int minimal;
@@ -140,17 +148,19 @@ public class Run implements Runnable {
         }
 
         if (cost != 0.0D && !p.hasPermission("mrtp.util.free")) {
-            Economy eco = null;
-            RegisteredServiceProvider<Economy> rsp = Bukkit.getServer().getServicesManager().getRegistration(Economy.class);
-            if (rsp != null) {
-                eco = rsp.getProvider();
+            boolean state = false;
+            if (econ != null) {
+                EconomyResponse.ResponseType type = econ.bankWithdraw(p.getName(), cost).type;
+
+                if (type.equals(EconomyResponse.ResponseType.SUCCESS)) {
+                    state = true;
+                }
             }
 
-            EconomyResponse.ResponseType type = eco.bankWithdraw(p.getName(), cost).type;
-            if (type.equals(EconomyResponse.ResponseType.SUCCESS)) {
+            if (state) {
                 p.sendMessage(prefix + " §r" + took_money.replace("%cost%", "" + cost));
             } else {
-                p.sendMessage(prefix + " §r" + poor_player);
+                p.sendMessage(prefix + " §r" + poor_player.replace("%cost%", "" + cost));
                 remove(player);
                 tasks.remove(player);
                 return;

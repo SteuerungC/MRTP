@@ -53,7 +53,7 @@ public class RectMode extends Mode {
         if(top == -1) {
             Block b = w.getHighestBlockAt(x, z).getLocation().subtract(0.0D, 1.0D, 0.0D).getBlock();
             if ((!biomes.contains(b.getBiome().name())) && (!blocks.contains(b.getType().name()))) {
-                return b.getLocation().add(0.5D, 1.0D, 0.5D);
+                return b.getLocation().add(0.5D, 2.0D, 0.5D);
             }
             b.getChunk().unload(true);
         } else {
@@ -63,7 +63,7 @@ public class RectMode extends Mode {
             }
             Block b = w.getBlockAt(x, choosen, z).getLocation().subtract(0.0D, 1.0D, 0.0D).getBlock();
             if ((!biomes.contains(b.getBiome().name())) && (!blocks.contains(b.getType().name()))) {
-                return b.getLocation().add(0.5D, 1.0D, 0.5D);
+                return b.getLocation().add(0.5D, 2.0D, 0.5D);
             }
             b.getChunk().unload(true);
         }

@@ -14,7 +14,7 @@ configured: false
 # List all worlds by name in that players can use the "/randomtp"-command. This values are case sensitive!
 enabled_worlds:
   - world
-  - world_nether
+  - freebuild
 
 # Here you have to insert some lines for each world. Here is an example for a world with round borders:
 # Please not that the randomtp will only work will in normal worlds (not in nether or ends)
@@ -72,9 +72,9 @@ messages:
    prefix: '&9[MRTP]&r'
    success: 'You were teleported to a random location.'
    not_enabled: '&cSorry. The teleport is disabled here right now.'
-   poor_player: '&cSorry ... the teleport cost too much.'
+   poor_player: '&cSorry ... the teleport cost too much. You need %cost% Dollars for this teleport.'
    took_money: '%cost% Dollars where taken for this teleport.'
-   cooldown: '&cSorry. You have to wait %time% seconds to the next teleport.'
+   cooldown: '&cSorry. You have to wait %time% seconds until the next teleport.'
    permission: '&cSorry. You are not allowed to do this.'
    anticheat: 'Sorry. You can not use Randomtp when you fall down or if you are in lava.'
    sign: 'Created sign sucessfully.'
@@ -89,14 +89,14 @@ cooldown:
     time: 10
 
 # Set to true if players should be charged for teleport. Set the price in the per-world-settings.
-vault: true
+vault: false
 
 # Set to true if players should not use the teleport if there are under water, in lava or falling down.
 anticheat: false
 
 # Settings where the players should not be send to.
 # Biomes: List biomes where the player should not be send to by the plugin.
-# Biomes: List blocks on its top the player should not be send to by the plugin. LAVA is automatically disabled by the plugin.
+# Blocks: List blocks on its top the player should not be send to by the plugin. LAVA is automatically disabled by the plugin.
 disabled:
   biomes:
   - OCEAN
