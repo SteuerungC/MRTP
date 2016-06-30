@@ -1,5 +1,5 @@
 # MRTP v1.0-BETA
-Advanced Random Teleport Plugin for Spigot 1.9.x
+Advanced Random Teleport Plugin for Spigot 1.9.x to 1.10.x
 Java-Version: 1.7 +
 
 **Note that this plugin is in _Beta_. You can use this plugin but there are may problems and bugs!**
